@@ -1,0 +1,35 @@
+﻿@model Pizza[]
+
+@{
+    ViewData["Title"] = "My pizzas";
+    var pizzas = Model;
+}
+
+<div class="pad d-flex justify-content-center">
+    <a href="@Url.Action("Create", "Pizza")" class="btn btn-primary">Create</a>
+</div>
+
+
+@if (pizzas.Length is 0)
+{
+    <p>No pizzas to display</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pizza in pizzas)
+            {
+                @await Html.PartialAsync("_Row", pizza)
+            }
+        </tbody>
+    </table>
+}
